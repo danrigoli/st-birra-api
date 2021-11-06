@@ -1,0 +1,40 @@
+import { DateTime } from 'luxon'
+import { BaseModel, beforeSave, column, manyToMany, ManyToMany } from '@ioc:Adonis/Lucid/Orm'
+import Hash from '@ioc:Adonis/Core/Hash'
+import Meeting from './Meeting'
+
+export default class User extends BaseModel {
+  @column({ isPrimary: true })
+  public id: number
+
+  @column()
+  public email: string
+
+  @column({ serializeAs: null })
+  public password: string
+
+  @column()
+  public name: string
+
+  @column({ serializeAs: 'roleId' })
+  public roleId: number
+
+  @beforeSave()
+  public static async hashPassword(user: User) {
+    if (user.$dirty.password) {
+      user.password = await Hash.make(user.password)
+    }
+  }
+  @column.dateTime({ autoCreate: true })
+  public createdAt: DateTime
+
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  public updatedAt: DateTime
+
+  public isAdmin() {
+    return this.roleId === 2
+  }
+
+  @manyToMany(() => Meeting)
+  public meetings: ManyToMany<typeof Meeting>
+}
