@@ -42,18 +42,14 @@ export default class Meeting extends BaseModel {
   }
 
   @column()
-  public weather: any;
+  public weather: any
 
   @afterFetch()
   public static async getWeather(meetings: Meeting[]) {
     await Promise.all(
       meetings.map(async (meeting) => {
         await meeting.load('users')
-        try {
-          meeting.weather = await getWeather(meeting.place)
-        } catch(error) {
-          meeting.weather = Promise.call('')
-        }
+        meeting.weather = await getWeather(meeting.place)
         return meeting
       })
     )

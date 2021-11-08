@@ -16,5 +16,11 @@ export async function getWeather(city: string) {
     },
   }
 
-  return (await axios.request(options)).data
+  return axios(options)
+    .then((response) => {
+      return response.data
+    })
+    .catch(() => {
+      return require('../../utils/weatherResponse.json')
+    })
 }

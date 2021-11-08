@@ -11,7 +11,7 @@ export default class MeetingsController {
 
   public async store(ctx: HttpContextContract) {
     const payload = await ctx.request.validate(MeetingValidator)
-    const meeting = await Meeting.create({...payload, admin_id: ctx.auth?.user?.id})
+    const meeting = await Meeting.create({ ...payload, admin_id: ctx.auth?.user?.id })
     return ctx.response.json(meeting)
   }
 
@@ -49,15 +49,17 @@ export default class MeetingsController {
 
   public async getUserMeetings({ auth, response }: HttpContextContract) {
     const user = auth.user
-      const meetings = await Meeting.query().whereHas('users', (builder) => {
+    const meetings = await Meeting.query()
+      .where('date', '>', DateTime.local().toSQL())
+      .whereHas('users', (builder) => {
         builder.where('users.id', user.id)
       })
-      return response.json(meetings)
+    return response.json(meetings)
   }
 
   public async getAdminMeetings({ auth }: HttpContextContract) {
     const user = auth.user
-    const meetings = await Meeting.query().where('admin_id', user.id)
+    const meetings = await Meeting.query().where('admin_id', user.id).where('date', '>', DateTime.local().toSQL())
     return meetings.map((meeting) => meeting.serialize())
   }
 
@@ -65,9 +67,23 @@ export default class MeetingsController {
     const user = auth.user
     const currentDate = DateTime.local()
     const endOfWeek = currentDate.endOf('week')
-    const meetings = await Meeting.query().whereBetween('date', [currentDate.toSQLDate(), endOfWeek.toSQLDate()]).whereDoesntHave('users', ((builder) => {
-      builder.where('users.id', user.id)
-    })).preload('users')
+    const meetings = await Meeting.query()
+      .whereBetween('date', [currentDate.toSQLDate(), endOfWeek.toSQLDate()])
+      .whereDoesntHave('users', (builder) => {
+        builder.where('users.id', user.id)
+      })
+      .preload('users')
+    return meetings.map((meeting) => meeting.serialize())
+  }
+
+  public async allMeets({ auth }: HttpContextContract) {
+    const user = auth.user
+    const meetings = await Meeting.query()
+      .whereDoesntHave('users', (builder) => {
+        builder.where('users.id', user.id)
+      })
+      .where('date', '>', DateTime.local().toSQL())
+      .preload('users')
     return meetings.map((meeting) => meeting.serialize())
   }
 
