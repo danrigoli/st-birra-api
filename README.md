@@ -1,6 +1,6 @@
 # Birra API
 
-El projecto utiliza <a href='https://adonisjs.com/'>AdonisJS</a> con MySQL 8.0.26.
+El projecto utiliza <a href='https://adonisjs.com/'>AdonisJS</a> (aunque es TS) con MySQL 8.0.26.
 Incluye Japa con NYC para el Testing y Coverage, y Swagger para la documentacion.
 
 ## Instalacion
