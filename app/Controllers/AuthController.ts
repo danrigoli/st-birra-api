@@ -13,7 +13,10 @@ export default class AuthController {
     if (!(await Hash.verify(user.password, payload.password))) {
       return response.badRequest('Invalid credentials')
     }
-    return { user: user.serialize(), token: (await auth.use('api').attempt(user.email, payload.password)).toJSON() }
+    return {
+      user: user.serialize(),
+      token: (await auth.use('api').attempt(user.email, payload.password)).toJSON(),
+    }
   }
 
   public async register({ auth, request }) {
@@ -27,7 +30,7 @@ export default class AuthController {
     return response.send(200)
   }
 
-  public async check({ auth, request }: HttpContextContract) {
+  public async check({ auth }: HttpContextContract) {
     return await auth.check()
   }
 }

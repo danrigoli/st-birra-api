@@ -1,0 +1,187 @@
+/api/meetings:
+  get:
+    tags:
+     - Meetings
+    security: []
+    description: Gets all meetings, requires admin role     
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Success
+      400:
+        description: Bad Request
+  post:
+    tags:
+      - Meetings
+    security: []
+    description: Creates meeting, requires admin role
+    parameters:
+      - name: meeting
+        in:  body
+        required: true
+        schema:
+          properties:
+            title:
+              type: string
+              example: 'Reunion de cerveceros'
+              required: true
+            description:
+              type: string
+              example: 'En esta reunion lo unico que hacemos es tomar cerveza!'
+            date:
+              type: string
+              example: '2020-12-30'
+              required: true
+            place:
+              type: string
+              example: 'Vicente Lopez'
+              required: true              
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Success
+      400:
+        description: Bad Request
+  put:
+    tags:
+      - Meetings
+    security: []
+    description: Edits meeting, requires admin role
+    parameters:
+      - name: meeting
+        in:  body
+        required: true
+        schema:
+          properties:
+            title:
+              type: string
+              example: 'Reunion de cerveceros'
+              required: true
+            description:
+              type: string
+              example: 'En esta reunion lo unico que hacemos es tomar cerveza!'
+            date:
+              type: string
+              example: '2020-12-30'
+              required: true
+            place:
+              type: string
+              example: 'Vicente Lopez'
+              required: true  
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Success
+      400:
+        description: Bad Request
+  delete:
+    tags:
+      - Meetings
+    security: []
+    description: Creates meeting, requires admin role
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Success
+      400:
+        description: Bad Request
+
+
+/api/admin/meetings:
+  get:
+    tags:
+     - Meetings
+    security: []
+    description: Gets all meetings, requires admin role     
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Success
+      400:
+        description: Bad Request
+
+/api/users/meetings:
+  get:
+    tags:
+     - Meetings
+    security: []
+    description: Gets user joined meetings     
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Success
+      400:
+        description: Bad Request
+
+
+/api/meetings/all:
+  get:
+    tags:
+     - Meetings
+    security: []
+    description: Gets all available meetings     
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Success
+      400:
+        description: Bad Request
+
+/api/meetings/week:
+  get:
+    tags:
+     - Meetings
+    security: []
+    description: Gets all available meetings of the week
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Success
+      400:
+        description: Bad Request
+
+/api/meetings/add/:id:
+  put:
+    tags:
+     - Meetings
+    security: []
+    description: Gets all available meetings of the week
+    parameters:
+      - name: meetingId
+        in:  parameters
+        required: true
+        example: 1
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Success
+      400:
+        description: Bad Request
+
+/api/meetings/remove/:id:
+  put:
+    tags:
+     - Meetings
+    security: []
+    description: Gets all available meetings of the week
+    parameters:
+      - name: meetingId
+        in:  parameters
+        required: true
+        example: 1
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Success
+      400:
+        description: Bad Request

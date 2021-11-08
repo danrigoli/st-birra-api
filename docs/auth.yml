@@ -1,0 +1,87 @@
+/api/login:
+  post:
+    tags:
+      - Auth
+    security: []
+    description: Login with Opaque Access Token
+    parameters:
+      - name: credentials
+        in:  body
+        required: true
+        schema:
+          properties:
+            email:
+              type: string
+              example: 'danterigoli02@gmail.com'
+              required: true
+            password:
+              type: string
+              example: 'S4nt4nd3r'
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Success
+      400:
+        description: Bad Request
+
+
+/api/register:
+  post:
+    tags:
+      - Auth
+    security: []
+    description: Register user
+    parameters:
+      - name: credentials
+        in:  body
+        required: true
+        schema:
+          properties:
+            name:
+              type: string
+              example: 'Dante Rigoli'
+              required: true
+            email:
+              type: string
+              example: 'danterigoli02@gmail.com'
+              required: true
+            password:
+              type: string
+              example: 'S4nt4nd3r'
+              required: true
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Success
+      400:
+        description: Bad Request
+
+
+/api/logout:
+  post:
+    tags:
+      - Auth
+    security: []
+    description: Logout
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Success
+
+
+/api/check:
+  get:
+    tags:
+      - Auth
+    security: []
+    description: Check if user is logged in
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Success
+      400:
+        description: Bad Request
