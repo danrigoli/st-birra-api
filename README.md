@@ -9,6 +9,8 @@ Primero instalamos dependencias: `npm i`
 Luego copiamos el .env.example: `cp .env.example .env`
 Luego corremos las migraciones: `node ace migration:run`. Cabe aclarar que tenemos que tener un esquema llamado santander_adonis, o bien, cambiarlo en el .env
 Ahora levantamos el servidor: `npm run dev` o `node ace serve --watch`
+Para hacer funcionar la Weather API, necesitan generar credenciales: https://rapidapi.com/community/api/open-weather-map/
+Si es necesario puedo pasarles mis credenciales, pero creo que me quedan menos de 50 de las 500 request gratuitas...
 Si todo esta bien, deberias poder acceder a http://127.0.0.1:3333 sin problemas (a menos que tengas el puerto ocupado)
 
 Si por alguna razon, no pudiste levantar las migraciones, hay un dump en la carpeta utils con lo justo y necesario.
