@@ -26,6 +26,9 @@ Para la Weather API elegi: https://rapidapi.com/community/api/open-weather-map, 
 La Weather API aveces se bloquea, por lo que en utils guarde una response de la API y cargara por defecto si la Weather API no devuelve nada o devuelve error.
 Con el tema de localizacion, queria usar la API de Google para que puedas escribir la direccion exacta pero por peleas con los de Google Cloud no tengo acceso a esas APIs por el momento. Entonces, agarre la API del gobierno para seleccionar la provincia y luego la localidad.
 
+## Docker
+La verdad es que queria implementar docker-compose pero por restricciones de tiempo no me fue posible, ya que en mi maquina no lo utilizo y hacer toda la instalacion iba a tardar demasiado en epocas de finales :(
+
 ## Dudas
 
 Cualquier duda no tengo problema en responderlas :D.
