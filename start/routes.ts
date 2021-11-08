@@ -1,7 +1,7 @@
 import Route from '@ioc:Adonis/Core/Route'
 
 Route.get('/', async () => {
-  return { hello: 'world' }
+  return 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
 })
 
 Route.group(() => {
